@@ -13,6 +13,8 @@ const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const expense_module_1 = require("./components/expense/expense.module");
 const expense_entity_1 = require("./components/expense/expense.entity");
+const user_module_1 = require("./components/user/user.module");
+const user_entity_1 = require("./components/user/user.entity");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -25,10 +27,11 @@ exports.AppModule = AppModule = __decorate([
                 database: 'expense',
                 username: 'root',
                 password: 'root',
-                entities: [expense_entity_1.Expense],
+                entities: [expense_entity_1.Expense, user_entity_1.default],
                 synchronize: true
             }),
-            expense_module_1.ExpenseModule
+            expense_module_1.ExpenseModule,
+            user_module_1.UserModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Expense } from "../expense/expense.entity";
 
 @Entity()
 export default class User{
@@ -13,5 +14,8 @@ export default class User{
     email:string;
 
     @Column()
-    phone:number
+    phone:number;
+
+    @OneToMany(()=>Expense, expenses=>expenses.user)
+    expenses:Expense
 }

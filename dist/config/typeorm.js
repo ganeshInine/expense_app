@@ -4,6 +4,7 @@ exports.connectionSource = void 0;
 const typeorm_1 = require("typeorm");
 const dotenv = require("dotenv");
 const expense_entity_1 = require("../components/expense/expense.entity");
+const user_entity_1 = require("../components/user/user.entity");
 dotenv.config();
 exports.connectionSource = new typeorm_1.DataSource({
     type: 'mysql',
@@ -12,7 +13,7 @@ exports.connectionSource = new typeorm_1.DataSource({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    entities: [expense_entity_1.Expense],
+    entities: [expense_entity_1.Expense, user_entity_1.default],
     migrations: [__dirname + '/../migrations/*{.ts,.js}'],
     synchronize: true,
 });

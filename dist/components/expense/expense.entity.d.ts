@@ -1,3 +1,4 @@
+import User from '../user/user.entity';
 export declare class Expense {
     id: number;
     amount: number;
@@ -5,4 +6,5 @@ export declare class Expense {
     description: string;
     created_at: Date;
     updated_at: Date;
+    user: User;
 }

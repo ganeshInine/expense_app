@@ -9,25 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.expenseDto = void 0;
+exports.UserDto = void 0;
 const class_validator_1 = require("class-validator");
-class expenseDto {
+class UserDto {
 }
-exports.expenseDto = expenseDto;
+exports.UserDto = UserDto;
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsEmpty)(),
     __metadata("design:type", String)
-], expenseDto.prototype, "expense_type", void 0);
+], UserDto.prototype, "name", void 0);
 __decorate([
+    (0, class_validator_1.IsEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], expenseDto.prototype, "description", void 0);
+], UserDto.prototype, "email", void 0);
 __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], expenseDto.prototype, "amount", void 0);
-__decorate([
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], expenseDto.prototype, "user_id", void 0);
-//# sourceMappingURL=expense.dto.js.map
+], UserDto.prototype, "phone", void 0);
+//# sourceMappingURL=user.dto.js.map

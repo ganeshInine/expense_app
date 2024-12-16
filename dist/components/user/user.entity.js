@@ -9,41 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Expense = void 0;
 const typeorm_1 = require("typeorm");
-const user_entity_1 = require("../user/user.entity");
-let Expense = class Expense {
+const expense_entity_1 = require("../expense/expense.entity");
+let User = class User {
 };
-exports.Expense = Expense;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Expense.prototype, "id", void 0);
+], User.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], User.prototype, "name", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], User.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], Expense.prototype, "amount", void 0);
+], User.prototype, "phone", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Expense.prototype, "expense_type", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Expense.prototype, "description", void 0);
-__decorate([
-    (0, typeorm_1.CreateDateColumn)(),
-    __metadata("design:type", Date)
-], Expense.prototype, "created_at", void 0);
-__decorate([
-    (0, typeorm_1.UpdateDateColumn)(),
-    __metadata("design:type", Date)
-], Expense.prototype, "updated_at", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.default, user => user.expenses),
-    __metadata("design:type", user_entity_1.default)
-], Expense.prototype, "user", void 0);
-exports.Expense = Expense = __decorate([
-    (0, typeorm_1.Entity)('expenses')
-], Expense);
-//# sourceMappingURL=expense.entity.js.map
+    (0, typeorm_1.OneToMany)(() => expense_entity_1.Expense, expenses => expenses.user),
+    __metadata("design:type", expense_entity_1.Expense)
+], User.prototype, "expenses", void 0);
+User = __decorate([
+    (0, typeorm_1.Entity)()
+], User);
+exports.default = User;
+//# sourceMappingURL=user.entity.js.map

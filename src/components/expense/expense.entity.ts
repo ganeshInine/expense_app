@@ -1,5 +1,6 @@
 import { create } from 'domain';
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import User from '../user/user.entity';
 
 @Entity('expenses')
 export class Expense {
@@ -19,4 +20,8 @@ export class Expense {
   created_at: Date;
   @UpdateDateColumn()  
   updated_at: Date;
+
+  @ManyToOne(()=>User,user=>user.expenses)
+  user:User;
+
 }

@@ -21,8 +21,8 @@ let ExpenseController = class ExpenseController {
     constructor(expesenService) {
         this.expesenService = expesenService;
     }
-    async getAllExpenses() {
-        return await this.expesenService.findAll();
+    async getAllExpenses(user_id, limit, offset, expense_type, created_at, updated_at) {
+        return await this.expesenService.findAll(user_id, limit, offset, expense_type, created_at, updated_at);
     }
     async getExpense(id) {
         return await this.expesenService.getExpense(id);
@@ -36,9 +36,15 @@ let ExpenseController = class ExpenseController {
 };
 exports.ExpenseController = ExpenseController;
 __decorate([
-    (0, common_1.Get)('getAllExpenses'),
+    (0, common_1.Get)('getAllExpenses/:user_id'),
+    __param(0, (0, common_1.Param)('user_id')),
+    __param(1, (0, common_1.Query)('limit')),
+    __param(2, (0, common_1.Query)('offset')),
+    __param(3, (0, common_1.Query)('expense_type')),
+    __param(4, (0, common_1.Query)('created_at')),
+    __param(5, (0, common_1.Query)('updated_at')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Number, Number, Number, String, Date, Date]),
     __metadata("design:returntype", Promise)
 ], ExpenseController.prototype, "getAllExpenses", null);
 __decorate([

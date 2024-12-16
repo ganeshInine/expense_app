@@ -17,19 +17,49 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
 const expense_entity_1 = require("./expense.entity");
 const typeorm_2 = require("@nestjs/typeorm");
+const user_service_1 = require("../user/user.service");
 let ExpenseService = class ExpenseService {
-    constructor(expeseRepository) {
+    constructor(expeseRepository, userService) {
         this.expeseRepository = expeseRepository;
+        this.userService = userService;
     }
-    async findAll() {
-        return await this.expeseRepository.find();
+    async findAll(user_id, limit, offset, expense_type, created_at, updated_at) {
+        const queryBuilder = this.expeseRepository
+            .createQueryBuilder('expenses')
+            .where('expenses.userId = :user_id', { user_id })
+            .offset(offset)
+            .limit(limit);
+        console.log(created_at);
+        if (expense_type) {
+            queryBuilder.andWhere('expenses.expense_type LIKE :expense_type', { expense_type: `%${expense_type}%` });
+        }
+        if (created_at) {
+            queryBuilder.andWhere('expenses.created_at LIKE :created_at', { created_at: `%${created_at}%` });
+        }
+        if (created_at && updated_at) {
+            queryBuilder.andWhere('expenses.created_at BETWEEN :created_at_start AND :updated_at_end', {
+                created_at_start: created_at,
+                updated_at_end: updated_at
+            });
+        }
+        const [data, total] = await queryBuilder.getManyAndCount();
+        return { data, total };
     }
     async getExpense(id) {
         return await this.expeseRepository.findOne({ where: { id: id } });
     }
-    async createExpense(expense) {
+    async createExpense(data) {
         try {
-            const createdExpense = this.expeseRepository.create(expense);
+            const user = await this.userService.getUser(data.user_id);
+            if (!user) {
+                throw new Error(`user with id${data.user_id} not found`);
+            }
+            const createdExpense = this.expeseRepository.create({
+                expense_type: data.expense_type,
+                amount: data.amount,
+                description: data.description,
+                user: user
+            });
             return await this.expeseRepository.save(createdExpense);
         }
         catch (error) {
@@ -53,6 +83,7 @@ exports.ExpenseService = ExpenseService;
 exports.ExpenseService = ExpenseService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_2.InjectRepository)(expense_entity_1.Expense)),
-    __metadata("design:paramtypes", [typeorm_1.Repository])
+    __metadata("design:paramtypes", [typeorm_1.Repository,
+        user_service_1.UserService])
 ], ExpenseService);
 //# sourceMappingURL=expense.service.js.map

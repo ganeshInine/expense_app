@@ -8,5 +8,8 @@ export class expenseDto{
     description:string;
 
     @IsNumber()
-    amount:number
+    amount:number;
+
+    @IsNumber()
+    user_id:number
 }
