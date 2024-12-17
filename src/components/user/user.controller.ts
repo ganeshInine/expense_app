@@ -8,8 +8,8 @@ export class UserController {
     constructor(private readonly userService:UserService){
 
     }
-    @Get('getUser')
-    async getUser(id:number):Promise<User>{
+    @Get('getUser/:id')
+    async getUser( @Param('id')id:number):Promise<User>{
         return this.userService.getUser(id);
     }
     @Get('getUsers')
@@ -18,6 +18,7 @@ export class UserController {
     }
     @Post('createUser')
     async createUser(@Body() user:UserDto):Promise<User>{
+        console.log("User inputt",user);
         return this.userService.createUser(user);
     }
     @Put('updatedUser/:id')

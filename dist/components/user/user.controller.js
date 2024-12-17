@@ -27,6 +27,7 @@ let UserController = class UserController {
         return this.userService.getUsers();
     }
     async createUser(user) {
+        console.log("User inputt", user);
         return this.userService.createUser(user);
     }
     async updateUser(user, id) {
@@ -35,7 +36,8 @@ let UserController = class UserController {
 };
 exports.UserController = UserController;
 __decorate([
-    (0, common_1.Get)('getUser'),
+    (0, common_1.Get)('getUser/:id'),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)

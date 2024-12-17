@@ -13,7 +13,7 @@ export default class User{
     @Column()
     email:string;
 
-    @Column()
+    @Column('bigint')
     phone:number;
 
     @OneToMany(()=>Expense, expenses=>expenses.user)
