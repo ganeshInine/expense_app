@@ -16,13 +16,13 @@ export class ExpenseController {
 
     }
 
-    @Get('getExpense')
-    async getExpense(id:number){
+    @Get('getExpense/:id')
+    async getExpense(@Param('id')id:number){
         return await this.expesenService.getExpense(id);
     }
     @Put('updateExpense/:id')
-    async updateExpense(@Body() expense:Expense, @Param(':id')id:number){
-        return await this.expesenService.updateExpense(expense,id)
+    async updateExpense(@Body() expense:Expense, @Param('id')id:number){
+      return await this.expesenService.updateExpense(expense,id)
     }
     @Post('createExpense')
     async createExpense(@Body() expense:expenseDto){

@@ -26,6 +26,7 @@ __decorate([
 ], UserDto.prototype, "email", void 0);
 __decorate([
     (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsPhoneNumber)(),
     __metadata("design:type", Number)
 ], UserDto.prototype, "phone", void 0);
 //# sourceMappingURL=user.dto.js.map

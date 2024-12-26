@@ -48,7 +48,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ExpenseController.prototype, "getAllExpenses", null);
 __decorate([
-    (0, common_1.Get)('getExpense'),
+    (0, common_1.Get)('getExpense/:id'),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
@@ -56,7 +57,7 @@ __decorate([
 __decorate([
     (0, common_1.Put)('updateExpense/:id'),
     __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Param)(':id')),
+    __param(1, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [expense_entity_1.Expense, Number]),
     __metadata("design:returntype", Promise)
